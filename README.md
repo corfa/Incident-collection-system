@@ -1,12 +1,5 @@
 # REST-API
 
-## Stack
-- Python 3
-- Postgres
-- RabbitMQ
-- FastAPI
-- Alembic
-- SQLAlchemy
 
 ## Features
 - User creation, sending a task to the message broker for email confirmation ([email confirmation service](https://github.com/corfa/email-confirmation-service)).

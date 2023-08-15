@@ -1,0 +1,2 @@
+class HashRecordNotFoundException(Exception):
+    pass

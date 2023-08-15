@@ -7,6 +7,20 @@ from routers import problems, finds
 
 
 class App:
+
+    """Class for running a FastAPI application on a specified host and port.
+
+    Args:
+        host (str): The host on which the application will be run.
+        port (int): The port on which the application will be run.
+
+    Attributes:
+        host (str): The host for running the application.
+        port (int): The port for running the application.
+        server (FastAPI): An instance of the FastAPI application.
+
+    """
+    
     def __init__(self, host: str, port: int):
         self.host = host
         self.port = port
@@ -19,7 +33,10 @@ class App:
                                    )
 
     def run(self):
-        check_db_connect()
-        self.server.include_router(problems.router)
-        self.server.include_router(finds.router)
-        uvicorn.run(self.server, host=self.host, port=self.port)
+        try:
+            check_db_connect()
+            self.server.include_router(problems.router)
+            self.server.include_router(finds.router)
+            uvicorn.run(self.server, host=self.host, port=self.port)
+        except:
+            raise Exception('Failed to build application')

@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, Depends, Path, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 
@@ -15,14 +15,16 @@ router = APIRouter()
 
 @router.post("/problems/", tags=["problems"])
 async def create_problem(request: Request, db: Session = Depends(get_db)):
-   
-   headers = dict(request.headers)
-   body = await request.json()
+   try:
+      headers = dict(request.headers)
+      body = await request.json()
 
-   data = {"headers": headers, "body": body}
-   hash = create_hash(data) 
-   
-   id_problem = insert_problem(db, data)
-   insert_hash_record(db, hash, id_problem)
-   
-   return {"hash" : hash}
+      data = {"headers": headers, "body": body}
+      hash = create_hash(data) 
+      
+      id_problem = insert_problem(db, data)
+      insert_hash_record(db, hash, id_problem)
+      
+      return {"hash" : hash}
+   except:
+         raise HTTPException(status_code=400,detail="Something went wrong")
