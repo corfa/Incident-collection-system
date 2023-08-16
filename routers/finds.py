@@ -21,9 +21,9 @@ async def find_problem(json_data: dict, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400,detail="Something went wrong")
 
 @router.get('/find2/', tags=['finds'])  
-def find_problem_by_hash(hash: str, db: Session = Depends(get_db)):
+def find_problem_by_hash(h: str, db: Session = Depends(get_db)):
     try:
-        id_problem = find_problem_id_by_hash(db, hash)
+        id_problem = find_problem_id_by_hash(db, h)
         problem = get_problem_by_id(db, id_problem)
         return {"problem": dict(problem)}
     except Exception as e:

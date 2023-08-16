@@ -1,16 +1,14 @@
-# REST-API
+# Incident collection system
 
 
-## Features
-- User creation, sending a task to the message broker for email confirmation ([email confirmation service](https://github.com/corfa/email-confirmation-service)).
-- User authentication and JWT token creation.
-
-## Future Goals
-1) Add the ability for authorized users to interact with an ML service that will process user photos.
-2) Add full CRUD functionality for users.
+## Endpoints
+### POST /problems
+- Description: Save data to the database including headers and JSON body. Only headers and body will be provided.
+### POST /find
+- Description: Search for records in the database based on provided key-value pairs in the JSON body.
+### GET /find2?h=hash
+- Description: Retrieve records from the database that match the provided hash value.
 
 ## Running the Service
-1) Install all the required dependencies: ```pip install -r requirements.txt```
-2) Create a ```.env``` file in the project's root directory and fill it with the necessary configuration variables. Refer to the example file ```.template.env.```
-3) Run the migrations to create the required tables in the database:```alembic upgrade head```
-4) Execute the ```main.py``` file.
+1) Create file ``` .env ``` from ``` .template.env ```
+2) Run commnad ``` sudo docker-compose up --build ```
