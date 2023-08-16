@@ -12,7 +12,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 def check_db_connect():
     try:
         session = SessionLocal()
-        session.execute(text("SELECT 1"))
+        session.execute(text('SELECT 1'))
         session.close()
     except:
         raise DBConnectException()

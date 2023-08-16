@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 
 from db.models import Problem
-from shemas.search import SearchQuery
 from db.exceptions.problem_exception import ProblemNotFoundException
 
 
@@ -17,18 +16,6 @@ def insert_problem(db: Session, data: dict) -> int:
     except Exception as e:
         raise e
 
-
-from sqlalchemy.orm import Session
-from sqlalchemy import or_
-
-from sqlalchemy import or_, func
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy import or_, func
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy import or_, func
-from sqlalchemy.dialects.postgresql import JSONB
-
-from sqlalchemy import or_, func
 
 def find_problems(db: Session, key: str, value: str) -> list:
     
@@ -46,7 +33,8 @@ def find_problems(db: Session, key: str, value: str) -> list:
     return [dict(record._asdict()) for record in records]
     
 
-def get_problem_by_id(db: Session, id: int):
+
+def get_problem_by_id(db: Session, id: int) -> dict:
     problem = db.query(Problem).filter_by(id=id).with_entities(Problem.headers, Problem.body).first()
     if problem:
         headers, body = problem 

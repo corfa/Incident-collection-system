@@ -38,5 +38,5 @@ class App:
             self.server.include_router(problems.router)
             self.server.include_router(finds.router)
             uvicorn.run(self.server, host=self.host, port=self.port)
-        except:
-            raise Exception('Failed to build application')
+        except Exception as e:
+            raise e
